@@ -11,8 +11,6 @@ public class FractalHeightMap {
 		}
 		
 		String name = Config.readConfig().name;
-		/* int dim = Config.readConfig().dim; */
-		/* int border = Config.readConfig().border; */
 		
 		File map = new File(name + ".png");
 
