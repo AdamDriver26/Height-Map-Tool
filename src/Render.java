@@ -27,8 +27,7 @@ public class Render {
 	public static void drawHeight(int[][] map) throws IOException {
 
 		int dim = Config.readConfig().dim;
-		String name = Config.readConfig().name;
-		//int border = Config.readConfig().border; 
+		String name = Config.readConfig().name; 
 		int sea = Config.readConfig().sea;
 
 		BufferedImage draw = new BufferedImage(dim, dim, BufferedImage.TYPE_INT_RGB);
@@ -50,15 +49,9 @@ public class Render {
 					g2d.setColor(Color.WHITE);
 					g2d.drawLine(i, j, i, j);
 				}
-				
-				else if (map[i][j] >= 255 - sea) {
-					Color green = new Color(map[i][j], map[i][j], map[i][j]);
-					g2d.setColor(green);
-					g2d.drawLine(i, j, i, j);
-				}
 
 				else {
-					Color green = new Color(map[i][j] / 5, map[i][j], map[i][j] / 5);
+					Color green = new Color(0, map[i][j], 0);
 					g2d.setColor(green);
 					g2d.drawLine(i, j, i, j);
 				}

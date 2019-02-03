@@ -20,14 +20,6 @@ public class HeightGenerator {
 
 		map = mapSmooth(mapSmooth(map, dim, border), dim, border);
 
-		// map = mapAddRandom(map, dim, border);
-
-		// map = mapSmooth(mapSmooth(map, dim, border), dim, border);
-
-		// map = mapAddRandom(map, dim, border);
-
-		// map = mapSmooth(mapSmooth(map, dim, border), dim, border);
-
 		return map;
 	}
 
@@ -62,12 +54,8 @@ public class HeightGenerator {
 			}
 		}
 
-		/*
-		 * for (int i = 0; i < dim; i++) { for(int j = 0; j < dim; j++) {
-		 * System.out.print(map[i][j] + " "); } System.out.print("\n"); }
-		 */
-
 		return map;
+
 	}
 
 	public static int[][] mapAddRandom(int[][] map, int dim, int border) {
@@ -85,7 +73,7 @@ public class HeightGenerator {
 
 	public static int[][] mapSmooth(int[][] map, int dim, int border) {
 
-		/* Smooths locally */
+		// Smooths locally
 		for (int i = border; i < dim - border; i++) {
 
 			for (int j = border; j < dim - border; j++) {
@@ -98,22 +86,4 @@ public class HeightGenerator {
 
 		return map;
 	}
-
-	/*
-	 * public static int[][] mapAmplify(int[][] map, int dim, int border) {
-	 * 
-	 * for (int i = border; i < dim - border; i++) {
-	 * 
-	 * for (int j = border; j < dim - border; j++) {
-	 * 
-	 * map[i][j] = ((map[i][j] / 255) * (map[i][j] / 255)) * 65025;
-	 * 
-	 * if (map[i][j] < 0) { map[i][j] = 0; }
-	 * 
-	 * else if (map[i][j] > 255) { map[i][j] = 255; }
-	 * 
-	 * } }
-	 * 
-	 * return map; }
-	 */
 }
