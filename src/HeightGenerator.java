@@ -33,7 +33,7 @@ public class HeightGenerator {
 
 		for (int i = border; i < dim - border; i++) {
 
-			for (int jC = border; j < dim - border; j++) {
+			for (int j = border; j < dim - border; j++) {
 				// Finds the distance between map[i][j] and the centre and computes height by an
 				// inverse square law
 
