@@ -1,0 +1,11 @@
+Image filename: default
+Map dimensions: 750
+Map border: 5
+Sea level: 10
+Map shape: t
+Slope steepness: 255
+Hill frequency: 50
+Hill size: 50
+
+
+
