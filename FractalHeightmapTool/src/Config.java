@@ -9,18 +9,14 @@ public class Config {
 	int sea; // Sea level (0 - 255)
 	String shape; // The main shape of the slope to the peak (sphere, s, triangle, t)
 	int slope; // The steepness of the slope (1 - 255)
-	int hFreq; // Frequency of hills (0 - 100)
-	int hSize; // Size of hills (1 - 255)
 
-	Config(String n, int d, int b, int c, String s, int l, int f, int h) {
+	Config(String n, int d, int b, int c, String s, int l) {
 		name = n;
 		dim = d;
 		border = b;
 		sea = c;
 		shape = s;
 		slope = l;
-		hFreq = f;
-		hSize = h;
 	}
 
 	public static void writeConfig() throws Exception {
@@ -34,8 +30,6 @@ public class Config {
 		p.println("Sea level: 25");
 		p.println("Map shape: sphere");
 		p.println("Slope steepness: 250");
-		p.println("Hill frequency: 50");
-		p.println("Hill size: 20");
 
 		p.close();
 	}
@@ -52,12 +46,10 @@ public class Config {
 		int sea = Integer.valueOf(s.nextLine().substring(11));
 		String shape = s.nextLine().substring(11);
 		int slope = Integer.valueOf(s.nextLine().substring(17));
-		int hFreq = Integer.valueOf(s.nextLine().substring(16));
-		int hSize = Integer.valueOf(s.nextLine().substring(11));
 
 		s.close();
 
-		return new Config(name, dim, border, sea, shape, slope, hFreq, hSize);
+		return new Config(name, dim, border, sea, shape, slope);
 
 	}
 

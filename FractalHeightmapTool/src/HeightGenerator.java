@@ -6,34 +6,31 @@ public class HeightGenerator {
 
 		int dim = Config.readConfig().dim;
 		int border = Config.readConfig().border;
-		int sea = Config.readConfig().sea;
-		String shape = Config.readConfig().shape;
-		int slope = Config.readConfig().slope;
-		int hFreq = Config.readConfig().hFreq;
-		int hSize = Config.readConfig().hSize;
+		//int sea = Config.readConfig().sea;
+		//String shape = Config.readConfig().shape;
+		//int slope = Config.readConfig().slope;
 
-		int[][] map = new int[dim][dim];
+		int[][] l0 = new int[dim][dim];
+		int[][] l1 = new int[dim][dim];
+		int[][] l2 = new int[dim][dim];
+		int[][] l3 = new int[dim][dim];
+		
+		LayerStack layers = new LayerStack(dim, l0, l1, l2, l3);
 
 		// Generates the basic structure determined by map shape in the config file
-		map = mapShape(dim, border, sea, shape, slope);
+		// map = mapShape(dim, border, sea, shape, slope);
 		
-		// Generates hills and valleys
-		map = mapHills(map, dim, border, hFreq, hSize);
-		map = mapValleys(map, dim, border, hFreq, hSize);
-		
-		// The first 2 passes adding noise
-		map = mapAddRandom(map, dim, border);
-		map = mapAddRandom(map, dim, border);
+		mapAddRandom(layers, dim, border);
 
 		// The first 2 smoothing passes
-		map = mapSmooth(map, dim, border);
-		map = mapSmooth(map, dim, border);
+		//map = mapSmooth(map, dim, border);
+		//map = mapSmooth(map, dim, border);
 		
 		//map = mapAddRandom(map, dim, border);
 		//map = mapSmooth(map, dim, border);
 		//map = mapSmooth(map, dim, border);
 
-		return map;
+		return LayerStack.WeightedSquash(layers, dim);
 	}
 
 	public static int[][] mapShape(int dim, int border, int sea, String shape, int slope) {
@@ -43,9 +40,9 @@ public class HeightGenerator {
 		int rmax = (int) ((dim / 2.0) - border);
 		//double angle = Math.atan(slope / rmax);
 
-		for (int i = border; i < dim - border; i++) {
+		for (int i = border; i <= dim - border; i++) {
 
-			for (int j = border; j < dim - border; j++) {
+			for (int j = border; j <= dim - border; j++) {
 				// Finds the distance between map[i][j] and the centre and computes height by an
 				// inverse square law
 
@@ -54,7 +51,7 @@ public class HeightGenerator {
 
 				r = (int) (Math.sqrt(di*di + dj*dj) + 1);
 
-				if ((shape.equals("triangle") || shape.equals("t")) && r < rmax) {
+				if ( (shape.equals("triangle") || shape.equals("t") ) && r < rmax) {
 					// Linear decline from peak to sea level
 					map[i][j] = rmax - r;
 				}
@@ -75,7 +72,7 @@ public class HeightGenerator {
 
 	}
 
-	public static int[][] mapHills(int[][] map, int dim, int border, int hFreq, int hSize) {
+	/*public static int[][] mapHills(int[][] map, int dim, int border, int hFreq, int hSize) {
 
 		for (int k = 0; k <= hFreq; k++) {
 
@@ -135,19 +132,19 @@ public class HeightGenerator {
 			}
 		}
 		return map;
-	}
+	} */
 
-	public static int[][] mapAddRandom(int[][] map, int dim, int border) {
+	public static void mapAddRandom(LayerStack layers, int dim, int border) {
+		
+		for (int i = 0; i < dim; i++) {
+			for (int j = 0; j < dim; j++) {
 
-		for (int i = border; i < dim - border; i++) {
-
-			for (int j = border; j < dim - border; j++) {
-
-				map[i][j] += (int) (Math.random() * 125 - 125);
+				layers.layer0[i][j] += (int) (Math.random() * 255);
+				layers.layer1[i][j] += (int) (Math.random() * 255);
+				layers.layer2[i][j] += (int) (Math.random() * 255);
+				layers.layer3[i][j] += (int) (Math.random() * 255);
 			}
 		}
-
-		return map;
 	}
 
 	public static int[][] mapSmooth(int[][] map, int dim, int border) {

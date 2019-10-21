@@ -42,9 +42,21 @@ public class Render {
 					g2d.setColor(Color.BLUE);
 					g2d.drawLine(i, j, i, j);
 				}
+				
+				else if (map[i][j] <= 1.5*sea){
+					Color sand = new Color(255-sea, 255-sea, 8*map[i][j]/10);
+					g2d.setColor(sand);
+					g2d.drawLine(i, j, i, j);
+				}
 
-				else if (map[i][j] >= 255) {
+				else if (map[i][j] >= 255-sea) {
 					g2d.setColor(Color.WHITE);
+					g2d.drawLine(i, j, i, j);
+				}
+				
+				else if (map[i][j] >= 170){
+					Color grey = new Color(map[i][j], map[i][j], map[i][j]);
+					g2d.setColor(grey);
 					g2d.drawLine(i, j, i, j);
 				}
 
