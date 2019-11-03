@@ -21,6 +21,10 @@ public class HeightGenerator {
 		// map = mapShape(dim, border, sea, shape, slope);
 		
 		mapAddRandom(layers, dim, border);
+		
+		layers = Upscale.stretch(layers);
+		
+		
 
 		// The first 2 smoothing passes
 		//map = mapSmooth(map, dim, border);
@@ -29,8 +33,11 @@ public class HeightGenerator {
 		//map = mapAddRandom(map, dim, border);
 		//map = mapSmooth(map, dim, border);
 		//map = mapSmooth(map, dim, border);
+		
 
-		return LayerStack.WeightedSquash(layers, dim);
+		//return LayerStack.WeightedSquash(layers, dim);
+		return layers.layer1;
+		
 	}
 
 	public static int[][] mapShape(int dim, int border, int sea, String shape, int slope) {

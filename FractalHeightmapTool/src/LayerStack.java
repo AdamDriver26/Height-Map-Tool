@@ -47,7 +47,7 @@ public class LayerStack {
 		for (int i = 0; i < dim; i++) {
 			for (int j = 0; j < dim; j++) {
 				
-					flat[i][j] += (4*layers.layer0[i][j] + 3*layers.layer1[i][j]/5 + 2*layers.layer2[i][j]/5 + layers.layer3[i][j])/10;
+					flat[i][j] += (layers.layer0[i][j]/8 + layers.layer1[i][j]/4 + 2*layers.layer2[i][j]/2 + layers.layer3[i][j]);
 			}
 		}
 		return flat;

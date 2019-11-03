@@ -1,5 +1,5 @@
 Image filename: default
-Map dimensions: 750
+Map dimensions: 250
 Map border: 5
 Sea level: 15
 Map shape: t
